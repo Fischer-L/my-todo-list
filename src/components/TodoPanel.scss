@@ -1,0 +1,49 @@
+@import "App.scss";
+
+.todo-panel {
+  --todo-panel__top-panel-height: 9rem;
+
+  width: $app-width;
+}
+
+.todo-panel__top-panel {
+  width: var(--app-width);
+  max-width: var(--app-max-width);
+  height: var(--todo-panel__top-panel-height);
+  padding-bottom: 1rem;
+  position: fixed;
+  top: 0;
+  display: grid;
+  grid-template-rows: 5fr 3fr;
+  grid-template-columns: 1fr;
+  box-sizing: border-box;
+  background: #51c87a;
+}
+
+.todo-panel__title {
+  margin: 0;
+  grid-area: 1 / 1 / 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fafbfc;
+  font-size: 2.4rem;
+  font-weight: lighter;
+}
+
+.todo-panel__input {
+  width: 80%;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-bottom: 1px solid #efefef;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  display: block;
+  grid-area: 2 / 1 / 2 / 1;
+  box-sizing: border-box;
+  color: var(--app-font-color);
+}
+
+.todo-panel__bottomPanel {
+
+}
