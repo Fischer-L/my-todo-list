@@ -1,9 +1,11 @@
+$app-width: 10%;
+
 .App {
   --app-width: 100%;
   --app-max-width: 100%;
   --app-font-color: #555;
 
-  width: var(--app-width);
+  width: $app-width;
   max-width: var(--app-max-width);
   height: 100%;
   margin: 0 auto;

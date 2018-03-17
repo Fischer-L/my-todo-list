@@ -1,7 +1,9 @@
+@import "App.scss";
+
 .todo-panel {
   --todo-panel__top-panel-height: 9rem;
 
-  width: 100%;
+  width: $app-width;
 }
 
 .todo-panel__top-panel {
