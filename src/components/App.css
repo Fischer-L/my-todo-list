@@ -1,0 +1,19 @@
+.App {
+  --app-width: 100%;
+  --app-max-width: 100%;
+  --app-font-color: #555;
+
+  width: var(--app-width);
+  max-width: var(--app-max-width);
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: content-box;
+  background: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .App {
+    --app-width: 70%;
+    --app-max-width: 640px;
+  }
+}
