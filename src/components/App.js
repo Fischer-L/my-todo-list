@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import TodoList from "./TodoList";
 import TodoPanel from "./TodoPanel";
 
 import "./App.css";
@@ -9,6 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <TodoPanel />
+        <TodoList />
       </div>
     );
   }

@@ -11,6 +11,10 @@ class TodoPanel extends Component {
           <input className="todo-panel__input" type="text" placeholder="What do you want to do?"></input>
         </div>
         <nav className="todo-panel__button-bar">
+          <button className="todo-panel__btn">Todo</button>
+          <button className="todo-panel__btn">Finished</button>
+          <button id="todo-panel-add-btn" className="todo-panel__btn">Add</button>
+          <button className="todo-panel__btn">Delete All</button>
         </nav>
       </section>
     );
