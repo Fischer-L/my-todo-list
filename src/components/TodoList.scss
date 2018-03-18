@@ -1,4 +1,133 @@
+@import "TodoPanel.scss";
+
+@function get-list-var($name, $width-size: "small") {
+  $done-btn-width: 4rem;
+
+  @if $name == "done-btn-width" { @return $done-btn-width; }
+}
+
 .todo-list {
   width: 100%;
-  margin-top: 1rem;
+  padding: 2.2rem 0 get-panel-var("button-bar-height")*2 0;
+  margin: 0;
+  background: #fff;
 }
+
+.todo-list__todo-item {
+  width: 100%;
+  padding: 0 1rem 1.5rem 0;
+  border-bottom: 1px solid #eee;
+  margin: 0 0 2rem 0;
+  list-style: none;
+}
+
+.todo-list__todo-item:last-child {
+  border: 0;
+}
+
+.todo-item__del-btn,
+.todo-item__done-btn {
+  width: get-list-var("done-btn-width");
+  height: get-list-var("done-btn-width");
+  border: 0;
+  background: none;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.todo-item__del-btn:hover,
+.todo-item__del-btn:active,
+.todo-item__done-btn:hover,
+.todo-item__done-btn:active {
+  outline: none;
+}
+
+.todo-item__del-btn {
+  border: 0;
+}
+
+.todo-item__del-btn::after,
+.todo-item__done-btn::after {
+  /* Button is far bigger than icon, why?
+     Because we need a larger touch area on mobile device.
+   */
+  $sz: get-list-var("done-btn-width") * 0.5;
+  $bg-sz: $sz * 0.6;
+
+  content: "";
+  width: $sz;
+  height: $sz;
+  background-size: $bg-sz;
+  background: center/$bg-sz no-repeat;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25%;
+  margin-left: -25%;
+}
+
+.todo-item__del-btn::after {
+  background-image: url('x-icon.svg');
+}
+
+.todo-item__done-btn::after {
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}
+
+.todo-item__content {
+  padding: 0rem;
+  padding-left: 0.5rem;
+  margin: 0;
+  resize: none;
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.todo-list__todo-item.todo-done > .todo-item__done-btn::after {
+  border-color: $app-active-color;
+  background-image: url('checked.svg');
+}
+
+.todo-list__todo-item.todo-done > .todo-item__content {
+  text-decoration: line-through;
+}
+
+/* Grid/Flexbox Layout:
+   Easier to dynamicall layout elements with the modern layout rules. 
+   However, the mobile side is fragile on supporting that.
+   So we still use the old ways below and put the modern ways here.
+   In the future, we could just remove the old ways.
+*/
+.todo-list__todo-item {
+  display: flex;
+  align-items: center;
+}
+
+.todo-item__content {
+  flex: 1;
+}
+/* Grid/Flexbox Layout End */
+
+/* Old Layout Way */
+.todo-list__todo-item {
+  padding: 0 get-list-var("done-btn-width") + 1rem;
+  padding-bottom: 1.5rem;
+  position: relative;
+}
+
+.todo-item__del-btn,
+.todo-item__done-btn {
+  margin-top: -1.5rem + -1 * get-list-var("done-btn-width") / 2;
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+}
+
+.todo-item__del-btn {
+  right: 0.5rem;
+  left: auto;
+}
+/* Old Layout Way End */

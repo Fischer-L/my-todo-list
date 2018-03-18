@@ -1,6 +1,6 @@
 @import "App.scss";
 
-@function get-panel-var($name, $width-size) {  
+@function get-panel-var($name, $width-size: "small") {
   $title-height: 3rem; 
   $input-height: 2rem;
   $top-panel-btm-space: 0.7rem;
@@ -31,53 +31,50 @@
 
 .todo-panel {
   width: 100%;
-  height: get-panel-var("panel-height", "small");
-  box-shadow: 0px 0px 3px 0px #888888;
+  height: get-panel-var("panel-height");
 }
 
 .todo-panel__top-panel {
-  width: get-var("app-width", "small");
-  max-width: get-var("app-max-width", "small");
-  height: get-panel-var("top-panel-height", "small");
-  padding-bottom: get-panel-var("top-panel-btm-space", "small");
+  width: get-var("app-width");
+  max-width: get-var("app-max-width");
+  height: get-panel-var("top-panel-height");
+  padding-bottom: get-panel-var("top-panel-btm-space");
   position: fixed;
   top: 0;
+  z-index: 2;
   background: #51c87a;
 }
 
 .todo-panel__title {
-  height: get-panel-var("title-height", "small");
-  line-height: get-panel-var("title-height", "small");
   margin: 0;
-  font-size: get-panel-var("title-font-size", "small");
+  font-size: get-panel-var("title-font-size");
   font-weight: lighter;
-  text-align: center;
   color: #fafbfc;
 }
 
 .todo-panel__input {
   width: 80%;
-  height: get-panel-var("input-height", "small");
   padding: 0.5rem 1rem;
   border: 0;
   border-bottom: 1px solid #efefef;
   margin: 0 auto;
-  font-size: get-panel-var("input-font-size", "small");
+  font-size: get-panel-var("input-font-size");
   display: block;
   color: $app-font-color;
 }
 
 .todo-panel__button-bar {
-  width: get-var("app-width", "small");
-  max-width: get-var("app-max-width", "small");
-  height: get-panel-var("button-bar-height", "small");
+  width: get-var("app-width");
+  max-width: get-var("app-max-width");
+  height: get-panel-var("button-bar-height");
   position: fixed;
   bottom: 0;
+  z-index: 1;
   box-shadow: 0px 0px 3px 0px #888888;
+  background: #fff;
 }
 
 .todo-panel__btn {
-  width: 25%;
   height: 78%;
   padding: 0;
   border: 0;
@@ -96,14 +93,62 @@
 
 .todo-panel__btn:active,
 .todo-panel__btn--action {
-  color: #efac2f;
+  color: $app-active-color;
   outline: none;
 }
 
+.todo-panel__btn:hover {
+  outline: none;
+}
+
+@media screen and (min-width: 1025px) {
+  .todo-panel {
+    height: get-panel-var("panel-height", "big");
+  }
+
+  .todo-panel__top-panel {
+    width: get-var("app-width", "big");
+    max-width: get-var("app-max-width", "big");
+    height: get-panel-var("top-panel-height", "big");
+    padding-bottom: get-panel-var("top-panel-btm-space", "big");
+  }
+
+  .todo-panel__title {
+    font-size: get-panel-var("title-font-size", "big");
+  }
+
+  .todo-panel__input {
+    font-size: get-panel-var("input-font-size", "big");
+  }
+
+  .todo-panel__button-bar {
+    width: get-var("app-width", "big");
+    max-width: get-var("app-max-width", "big");
+    height: get-panel-var("button-bar-height", "big");
+    top: get-panel-var("top-panel-height", "big");
+    bottom: auto;
+  }
+
+  .todo-panel__btn {
+    font-size: 1.1rem;
+  }
+
+  /* One single touch on a mobile device would bring the :hover state.
+     In that case, we don't want to change color so only do on PCs.
+   */
+  .todo-panel__btn:hover {
+    color: $app-active-color;
+  }
+
+  #todo-panel-add-btn {
+    display: none;
+  }
+}
+
 /* Grid/Flexbox Layout:
-   Easier to dynamicall ylayout elements with the modern layout rules. 
+   Easier to dynamicall layout elements with the modern layout rules. 
    However, the mobile side is fragile on supporting that.
-   So we still use the old ways above and put the modern ways here.
+   So we still use the old ways below and put the modern ways here.
    In the future, we could just remove the old ways.
 */
 .todo-panel__top-panel {
@@ -134,52 +179,39 @@
 }
 /* Grid/Flexbox Layout End */
 
+/* Old Layout Way */
+.todo-panel__title {
+  height: get-panel-var("title-height");
+  line-height: get-panel-var("title-height");
+  text-align: center;
+}
+
+.todo-panel__input {
+  height: get-panel-var("input-height");
+}
+
+.todo-panel__button-bar {
+  display: block;
+}
+
+.todo-panel__btn {
+  width: 25%;
+  position: relative;
+  top: 11%;
+}
+
 @media screen and (min-width: 1025px) {
-  .todo-panel {
-    height: get-panel-var("panel-height", "big");
-  }
-
-  .todo-panel__top-panel {
-    width: get-var("app-width", "big");
-    max-width: get-var("app-max-width", "big");
-    height: get-panel-var("top-panel-height", "big");
-    padding-bottom: get-panel-var("top-panel-btm-space", "big");
-  }
-
   .todo-panel__title {
     height: get-panel-var("title-height", "big");
     line-height: get-panel-var("title-height", "big");
-    font-size: get-panel-var("title-font-size", "big");
   }
 
   .todo-panel__input {
     height: get-panel-var("input-height", "big");
-    font-size: get-panel-var("input-font-size", "big");
-  }
-
-  .todo-panel__button-bar {
-    width: get-var("app-width", "big");
-    max-width: get-var("app-max-width", "big");
-    height: get-panel-var("button-bar-height", "big");
-    top: get-panel-var("top-panel-height", "big");
-    bottom: auto;
-    box-shadow: unset;
   }
 
   .todo-panel__btn {
     width: 33.33%;
-    font-size: 1.1rem;
-  }
-
-  /* One single touch on a mobile device would bring the :hover state.
-     In that case, we don't want to change color so only do on PCs.
-   */
-  .todo-panel__btn:hover {
-    color: #efac2f;
-    outline: none;
-  }
-
-  #todo-panel-add-btn {
-    display: none;
   }
 }
+/* Old Layout Way End */
