@@ -4,7 +4,7 @@
   $title-height: 3rem; 
   $input-height: 2rem;
   $top-panel-btm-space: 0.7rem;
-  $button-bar-height: 3rem;
+  $button-bar-height: 3.3rem;
   $title-font-size: 1.8rem;
   $input-font-size: 1rem;
   @if $width-size == "big" {
@@ -53,10 +53,10 @@
 }
 
 .todo-panel__input {
-  width: 80%;
+  width: 90%;
   padding: 0.5rem 1rem;
   border: 0;
-  border-bottom: 1px solid #efefef;
+  border-radius: 2px;
   margin: 0 auto;
   font-size: get-panel-var("input-font-size");
   display: block;
@@ -118,6 +118,7 @@
   }
 
   .todo-panel__input {
+    width: 80%;
     font-size: get-panel-var("input-font-size", "big");
   }
 
