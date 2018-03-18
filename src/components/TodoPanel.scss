@@ -1,49 +1,78 @@
 @import "App.scss";
 
-.todo-panel {
-  --todo-panel__top-panel-height: 9rem;
+$todo-panel__title-height: 5rem;
+$todo-panel__input-height: 3rem;
+$top-panel-btm-space: 1rem;
+$top-panel-height: $todo-panel__title-height + $todo-panel__input-height + $top-panel-btm-space;
 
-  width: $app-width;
+.todo-panel {
+  width: 100%;
 }
 
 .todo-panel__top-panel {
-  width: var(--app-width);
-  max-width: var(--app-max-width);
-  height: var(--todo-panel__top-panel-height);
-  padding-bottom: 1rem;
+  width: get-var("app-width", "small");
+  max-width: get-var("app-max-width", "small");
+  height: $top-panel-height;
+  padding-bottom: $top-panel-btm-space;
+  box-sizing: border-box;
   position: fixed;
   top: 0;
-  display: grid;
-  grid-template-rows: 5fr 3fr;
-  grid-template-columns: 1fr;
-  box-sizing: border-box;
   background: #51c87a;
 }
 
 .todo-panel__title {
+  height: $todo-panel__title-height;
+  line-height: $todo-panel__title-height;
   margin: 0;
-  grid-area: 1 / 1 / 1 / 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fafbfc;
   font-size: 2.4rem;
   font-weight: lighter;
+  text-align: center;
+  color: #fafbfc;
 }
 
 .todo-panel__input {
   width: 80%;
+  height: $todo-panel__input-height;
   padding: 0.5rem 1rem;
   border: 0;
   border-bottom: 1px solid #efefef;
   margin: 0 auto;
+  box-sizing: border-box;
   font-size: 1.1rem;
   display: block;
-  grid-area: 2 / 1 / 2 / 1;
-  box-sizing: border-box;
-  color: var(--app-font-color);
+  color: $app-font-color;
 }
 
 .todo-panel__bottomPanel {
 
+}
+
+/* Grid/Flexbox Layout:
+   Easier to achieve centering, positioning elements with the modern layout rules. 
+   However, the mobile side is fragile on supporting that.
+   So we still use the old ways above and put the modern ways here.
+*/
+.todo-panel__top-panel {
+  display: grid;
+  grid-template-rows: 5fr 3fr;
+  grid-template-columns: 1fr;
+}
+
+.todo-panel__title {
+  grid-area: 1 / 1 / 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-panel__input {
+  grid-area: 2 / 1 / 2 / 1;
+}
+/* Grid/Flexbox Layout End*/
+
+@media screen and (min-width: 768px) {
+  .todo-panel__top-panel {
+    width: get-var("app-width", "big");
+    max-width: get-var("app-max-width", "big");
+  }
 }
