@@ -1,9 +1,28 @@
 @import "App.scss";
 
-$todo-panel__title-height: 5rem;
-$todo-panel__input-height: 3rem;
-$top-panel-btm-space: 1rem;
-$top-panel-height: $todo-panel__title-height + $todo-panel__input-height + $top-panel-btm-space;
+@function get-panel-var($name, $width-size) {  
+  $title-height: 3rem; 
+  $input-height: 2rem;
+  $top-panel-btm-space: 0.7rem;
+  $title-font-size: 1.8rem;
+  $input-font-size: 1rem;
+  @if $width-size == "big" {
+    $title-height: 5rem;
+    $input-height: 3rem;
+    $top-panel-btm-space: 1rem;
+    $title-font-size: 2.4rem;
+    $input-font-size: 1rem;
+  }
+
+  @if $name == "title-font-size" { @return $title-font-size; }
+  @if $name == "input-font-size" { @return $input-font-size; }
+  @if $name == "title-height" { @return $title-height; }
+  @if $name == "input-height" { @return  $input-height; }
+  @if $name == "top-panel-btm-space" { @return  $top-panel-btm-space; }
+  @if $name == "top-panel-height" {
+    @return $title-height + $input-height + $top-panel-btm-space;
+  }
+}
 
 .todo-panel {
   width: 100%;
@@ -12,8 +31,8 @@ $top-panel-height: $todo-panel__title-height + $todo-panel__input-height + $top-
 .todo-panel__top-panel {
   width: get-var("app-width", "small");
   max-width: get-var("app-max-width", "small");
-  height: $top-panel-height;
-  padding-bottom: $top-panel-btm-space;
+  height: get-panel-var("top-panel-height", "small");
+  padding-bottom: get-panel-var("top-panel-btm-space", "small");
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -21,10 +40,10 @@ $top-panel-height: $todo-panel__title-height + $todo-panel__input-height + $top-
 }
 
 .todo-panel__title {
-  height: $todo-panel__title-height;
-  line-height: $todo-panel__title-height;
+  height: get-panel-var("title-height", "small");
+  line-height: get-panel-var("title-height", "small");
   margin: 0;
-  font-size: 2.4rem;
+  font-size: get-panel-var("title-font-size", "small");
   font-weight: lighter;
   text-align: center;
   color: #fafbfc;
@@ -32,13 +51,13 @@ $top-panel-height: $todo-panel__title-height + $todo-panel__input-height + $top-
 
 .todo-panel__input {
   width: 80%;
-  height: $todo-panel__input-height;
+  height: get-panel-var("input-height", "small");
   padding: 0.5rem 1rem;
   border: 0;
   border-bottom: 1px solid #efefef;
   margin: 0 auto;
   box-sizing: border-box;
-  font-size: 1.1rem;
+  font-size: get-panel-var("input-font-size", "small");
   display: block;
   color: $app-font-color;
 }
@@ -74,5 +93,18 @@ $top-panel-height: $todo-panel__title-height + $todo-panel__input-height + $top-
   .todo-panel__top-panel {
     width: get-var("app-width", "big");
     max-width: get-var("app-max-width", "big");
+    height: get-panel-var("top-panel-height", "big");
+    padding-bottom: get-panel-var("top-panel-btm-space", "big");
+  }
+
+  .todo-panel__title {
+    height: get-panel-var("title-height", "big");
+    line-height: get-panel-var("title-height", "big");
+    font-size: get-panel-var("title-font-size", "big");
+  }
+
+  .todo-panel__input {
+    height: get-panel-var("input-height", "big");
+    font-size: get-panel-var("input-font-size", "big");
   }
 }
