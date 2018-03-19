@@ -35,13 +35,9 @@
 }
 
 .todo-panel__top-panel {
-  width: get-var("app-width");
-  max-width: get-var("app-max-width");
+  width: 100%;
   height: get-panel-var("top-panel-height");
   padding-bottom: get-panel-var("top-panel-btm-space");
-  position: fixed;
-  top: 0;
-  z-index: 2;
   background: #51c87a;
 }
 
@@ -111,6 +107,9 @@
     max-width: get-var("app-max-width", "big");
     height: get-panel-var("top-panel-height", "big");
     padding-bottom: get-panel-var("top-panel-btm-space", "big");
+    position: fixed;
+    top: 0;
+    z-index: 2;
   }
 
   .todo-panel__title {

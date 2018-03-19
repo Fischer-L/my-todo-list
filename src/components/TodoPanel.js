@@ -43,6 +43,7 @@ class TodoPanel extends Component {
     // We should wait for the button focused, then switch to the input.
     // Otherwise, unable to make sure the input gets focused.
     window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
       window.requestAnimationFrame(() => {
         let input = document.querySelector(".todo-panel__input");
         input.focus();
