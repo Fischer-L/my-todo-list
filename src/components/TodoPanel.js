@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { addTodo, filterTodo } from "../actions";
+import { addTodo, filterTodo, delAllDone } from "../actions";
 import { TodoType } from "../reducers";
 
 import "./TodoPanel.css";
@@ -30,6 +30,10 @@ class TodoPanel extends Component {
         this.props.filterTodo("todo-done");
         break;
     }
+  }
+
+  onDelAllDone = () => {
+    this.props.delAllDone();
   }
 
   render() {
@@ -70,7 +74,9 @@ class TodoPanel extends Component {
                   onMouseUp={this.onFilterTodo}
           >Dones</button>
           <button id="todo-panel-add-btn" className="todo-panel__btn">Add</button>
-          <button className="todo-panel__btn">Clear dones</button>
+          <button className="todo-panel__btn"
+                  onMouseUp={this.onDelAllDone}
+          >Clear dones</button>
         </nav>
       </section>
     );
@@ -81,10 +87,11 @@ TodoPanel.propTypes = {
   typeDisplayed: TodoType.typeDisplayed,
   addTodo: PropTypes.func.isRequired,
   filterTodo: PropTypes.func.isRequired,
+  delAllDone: PropTypes.func.isRequired,
 };
 
 export default connect(state => ({
   typeDisplayed: state.typeDisplayed
 }), { 
-  addTodo, filterTodo 
+  addTodo, filterTodo, delAllDone
 })(TodoPanel);

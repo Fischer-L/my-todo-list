@@ -8,6 +8,10 @@ export const delTodo = id => ({
   id
 });
 
+export const delAllDone = () => ({
+  type: "DEL_ALL_DONE",
+});
+
 export const doneTodo = id => ({
   type: "DONE_TODO",
   id
