@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { addTodo, filterTodo, delAllDone } from "../actions";
-import { TodoType } from "../reducers";
+import { TODO_TYPE, APP_CONST } from "../reducers";
 
 import "./TodoPanel.css";
 
@@ -57,7 +57,7 @@ class TodoPanel extends Component {
           <input className="todo-panel__input" 
                  type="text"
                  placeholder="What do you want to do?"
-                 maxLength="250"
+                 maxLength={APP_CONST.maxToDoLength}
                  onKeyDown={this.onEnter}></input>
         </div>
         <nav className="todo-panel__button-bar">
@@ -84,7 +84,7 @@ class TodoPanel extends Component {
 }
 
 TodoPanel.propTypes = {
-  typeDisplayed: TodoType.typeDisplayed,
+  typeDisplayed: TODO_TYPE.typeDisplayed,
   addTodo: PropTypes.func.isRequired,
   filterTodo: PropTypes.func.isRequired,
   delAllDone: PropTypes.func.isRequired,

@@ -28,15 +28,20 @@ import typeDisplayed from "./typeDisplayed";
 // Probably we could use immutable.js and flow.js in the future.
 // But let's not worry about that first since the app is simple now.
 // Let's get the app completed first.
-const TodoType = {};
-TodoType.todo = PropTypes.shape({
+const TODO_TYPE = {};
+TODO_TYPE.todo = PropTypes.shape({
   id: PropTypes.string.isRequired,
   isDone: PropTypes.bool.isRequired,
   content: PropTypes.string.isRequired
 });
-TodoType.todos = PropTypes.arrayOf(TodoType.todo).isRequired;
-TodoType.typeDisplayed = PropTypes.string.isRequired;
-export { TodoType };
+TODO_TYPE.todos = PropTypes.arrayOf(TODO_TYPE.todo).isRequired;
+TODO_TYPE.typeDisplayed = PropTypes.string.isRequired;
+
+const APP_CONST = {
+  maxToDoLength: 250
+};
+
+export { TODO_TYPE, APP_CONST };
 
 export default combineReducers({
   todos,

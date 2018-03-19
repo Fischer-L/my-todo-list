@@ -26,3 +26,9 @@ export const filterTodo = typeDisplayed => ({
   type: "FILTER_TODO",
   typeDisplayed
 });
+
+export const updateTodo = (id, content) => ({
+  type: "UPDATE_TODO",
+  id,
+  content
+});

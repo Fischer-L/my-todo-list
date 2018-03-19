@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { delTodo, doneTodo, undoneTodo } from "../actions";
-import { TodoType } from "../reducers";
+import { delTodo, doneTodo, undoneTodo, updateTodo } from "../actions";
+import { TODO_TYPE, APP_CONST } from "../reducers";
 
 import "./TodoList.css";
 
@@ -21,18 +21,47 @@ class TodoItem extends Component {
     this.props.delTodo(this.props.todo.id);
   }
 
+  onEdit = e => {
+    let content = e.target;
+    let todoItem = content.parentNode;
+    let textarea = todoItem.querySelector(".todo-item__textarea");
+    todoItem.classList.add("edit-todo");
+    textarea.value = content.textContent;
+    textarea.focus();
+  }
+
+  onEnter = e => {
+    if (e.key == "Enter" && e.target.value) {
+      let todoItem = e.target.parentNode;
+      todoItem.classList.remove("edit-todo");
+      this.props.updateTodo(this.props.todo.id, e.target.value);
+    }
+  }
+
+  onBlur = e => {
+    let todoItem = e.target.parentNode;
+    todoItem.classList.remove("edit-todo");
+  }
+
   render() {
     let todo = this.props.todo;
-    let className = "todo-list__todo-item ";
+    let className = "";
     if (todo.isDone) {
       className += "todo-done";
     }
     return (
-      <li className={className}>
+      <li className={`todo-list__todo-item ${className}`}>
         <button className="todo-item__done-btn"
                 onMouseUp={this.onDoneBtnClick}
         ></button>
-        <p className="todo-item__content">{todo.content}</p>
+        <p className="todo-item__content"
+           onMouseUp={this.onEdit}
+        >{todo.content}</p>
+        <textarea className="todo-item__textarea"
+                  maxLength={APP_CONST.maxToDoLength}
+                  onBlur={this.onBlur}
+                  onKeyDown={this.onEnter}
+        ></textarea>
         <button className="todo-item__del-btn"
                 onMouseUp={this.onDelBtnClick}
         ></button>
@@ -42,7 +71,7 @@ class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-  todo: TodoType.todo.isRequired,
+  todo: TODO_TYPE.todo.isRequired,
   delTodo: PropTypes.func.isRequired,
   doneTodo: PropTypes.func.isRequired,
   undoneTodo: PropTypes.func.isRequired,
@@ -56,7 +85,8 @@ class TodoList extends Component {
                                         key={todo.id} todo={todo}
                                         delTodo={this.props.delTodo}
                                         doneTodo={this.props.doneTodo}
-                                        undoneTodo={this.props.undoneTodo} />);
+                                        undoneTodo={this.props.undoneTodo}
+                                        updateTodo={this.props.updateTodo} />);
     return (
       <ul className="todo-list">{todoItems}</ul>
     );
@@ -64,10 +94,11 @@ class TodoList extends Component {
 }
 
 TodoList.propTypes = {
-  visibleTodos: PropTypes.arrayOf(TodoType.todo).isRequired,
+  visibleTodos: PropTypes.arrayOf(TODO_TYPE.todo).isRequired,
   delTodo: PropTypes.func.isRequired,
   doneTodo: PropTypes.func.isRequired,
   undoneTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
 };
 
 function filterTodos(state) {
@@ -86,4 +117,5 @@ export default connect(state => ({
   delTodo,
   doneTodo,
   undoneTodo,
+  updateTodo,
 })(TodoList);
