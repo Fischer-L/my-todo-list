@@ -17,3 +17,8 @@ export const undoneTodo = id => ({
   type: "UNDONE_TODO",
   id
 });
+
+export const filterTodo = typeDisplayed => ({
+  type: "FILTER_TODO",
+  typeDisplayed
+});

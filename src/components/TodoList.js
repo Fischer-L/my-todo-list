@@ -76,17 +76,8 @@ function filterTodos(state) {
     // Because below return an new array so this is for consistency.
     return state.todos.slice();
   }
-  return state.todos.reduce((filtereds, todo) => {
-    if (state.typeDisplayed === "todo-not-done") {
-      if (!todo.isDone) {
-        filtereds.push(todo);
-      }
-    } else {
-      if (todo.isDone) {
-        filtereds.push(todo);
-      }
-    }
-  }, []);
+  let done = state.typeDisplayed === "todo-done";
+  return state.todos.filter(todo => todo.isDone === done);
 }
 
 export default connect(state => ({
