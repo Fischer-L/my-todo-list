@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import PropTypes from "prop-types";
 
 import todos from "./todos";
 import typeDisplayed from "./typeDisplayed";
@@ -27,6 +28,16 @@ import typeDisplayed from "./typeDisplayed";
 // Probably we could use immutable.js and flow.js in the future.
 // But let's not worry about that first since the app is simple now.
 // Let's get the app completed first.
+const TodoType = {};
+TodoType.todo = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  isDone: PropTypes.bool.isRequired,
+  content: PropTypes.string.isRequired
+});
+TodoType.todos = PropTypes.arrayOf(TodoType.todo).isRequired;
+TodoType.typeDisplayed = PropTypes.string.isRequired;
+export { TodoType };
+
 export default combineReducers({
   todos,
   typeDisplayed

@@ -11,6 +11,10 @@ export default function todos (state = [], action) {
         });
       }
       break;
+
+    case "DEL_TODO":
+      state = state.filter(todo => todo.id !== action.id);
+      break;
   }
   return state;
 }
