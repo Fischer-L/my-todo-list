@@ -38,16 +38,21 @@ class TodoPanel extends Component {
   }
 
   onAskAddTodo = e => {
-    // Let's focus the input after 2 painting ticks, why?
-    // Because when touching the button, the buttono will get the focus.
-    // We should wait for the button focused, then switch to the input.
-    // Otherwise, unable to make sure the input gets focused.
     window.requestAnimationFrame(() => {
+      window.onscroll = () => {
+        window.onscroll = null;
+        // Let's focus the input after multiple painting ticks, why?
+        // Because when touching the button, the buttono will get the focus.
+        // We should wait for the button focused and blured, then switch to the input.
+        // Otherwise, unable to make sure the input gets focused.
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            let input = document.querySelector(".todo-panel__input");
+            input.focus();
+          });
+        });
+      };
       window.scrollTo(0, 0);
-      window.requestAnimationFrame(() => {
-        let input = document.querySelector(".todo-panel__input");
-        input.focus();
-      });
     });
   }
 
