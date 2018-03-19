@@ -5,3 +5,4 @@
 - UPDATE_TODO
 - FILTER_TODO
 - DEL_ALL_DONE
+- Focus

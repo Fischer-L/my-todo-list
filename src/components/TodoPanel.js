@@ -13,6 +13,7 @@ class TodoPanel extends Component {
     if (e.key == "Enter" && e.target.value) {
       this.props.addTodo(e.target.value);
       e.target.value = "";
+      e.target.blur();
     }
   }
 
@@ -34,6 +35,19 @@ class TodoPanel extends Component {
 
   onDelAllDone = () => {
     this.props.delAllDone();
+  }
+
+  onAskAddTodo = e => {
+    // Let's focus the input after 2 painting ticks, why?
+    // Because when touching the button, the buttono will get the focus.
+    // We should wait for the button focused, then switch to the input.
+    // Otherwise, unable to make sure the input gets focused.
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        let input = document.querySelector(".todo-panel__input");
+        input.focus();
+      });
+    });
   }
 
   render() {
@@ -73,7 +87,17 @@ class TodoPanel extends Component {
                   className={`todo-panel__btn ${donesActive}`}
                   onMouseUp={this.onFilterTodo}
           >Dones</button>
-          <button id="todo-panel-add-btn" className="todo-panel__btn">Add</button>
+          { // Why a #todo-panel-add-btn button?
+            // This button only appears on small screens (mobile devices)
+            // and is setting at the bottom of our Todo app.
+            // Since our input is far away at the top.
+            // When touching this button, we will focus the input
+            // so the keyboard will prompt and users can quickly adding todos.
+          }
+          <button id="todo-panel-add-btn"
+                  className="todo-panel__btn"
+                  onTouchEnd={this.onAskAddTodo}
+          >Add</button>
           <button className="todo-panel__btn"
                   onMouseUp={this.onDelAllDone}
           >Clear dones</button>
