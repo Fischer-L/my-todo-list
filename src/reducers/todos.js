@@ -3,12 +3,12 @@ export default function todos (state = [], action) {
     case "ADD_TODO":
       if (action.content) {
         console.log("TMP> Reducer ADD_TODO", action.content);
-        let todo = {
+        state = state.slice();
+        state.push({
           id: `${Date.now()}`,
           isDone: false,
           content: action.content,
-        };
-        state.push(todo);
+        });
       }
       break;
   }

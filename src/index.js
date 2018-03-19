@@ -16,3 +16,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+window._TMP_store = store;

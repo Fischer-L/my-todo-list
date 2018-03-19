@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import todos from "./todos";
+import typeDisplayed from "./typeDisplayed";
 
 // The state's data format as below:
 // {
@@ -28,4 +29,5 @@ import todos from "./todos";
 // Let's get the app completed first.
 export default combineReducers({
   todos,
+  typeDisplayed
 });

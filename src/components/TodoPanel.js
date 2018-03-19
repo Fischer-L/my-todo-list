@@ -10,8 +10,8 @@ class TodoPanel extends Component {
   onEnter = e => {
     console.log("TMP> TodoPanel onEnter");
     if (e.key == "Enter" && e.target.value) {
-      console.log("TMP> TodoPanel onEnter", e.target.value);
       this.props.addTodo(e.target.value);
+      e.target.value = "";
     }
   }
 
@@ -23,6 +23,7 @@ class TodoPanel extends Component {
           <input className="todo-panel__input" 
                  type="text"
                  placeholder="What do you want to do?"
+                 maxLength="250"
                  onKeyDown={this.onEnter}></input>
         </div>
         <nav className="todo-panel__button-bar">
