@@ -1,14 +1,29 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { addTodo } from "../actions";
 
 import "./TodoPanel.css";
 
 class TodoPanel extends Component {
+
+  onEnter = e => {
+    console.log("TMP> TodoPanel onEnter");
+    if (e.key == "Enter" && e.target.value) {
+      console.log("TMP> TodoPanel onEnter", e.target.value);
+      this.props.addTodo(e.target.value);
+    }
+  }
+
   render() {
     return (
       <section className="todo-panel">
         <div className="todo-panel__top-panel">
           <h1 className="todo-panel__title">todos</h1>
-          <input className="todo-panel__input" type="text" placeholder="What do you want to do?"></input>
+          <input className="todo-panel__input" 
+                 type="text"
+                 placeholder="What do you want to do?"
+                 onKeyDown={this.onEnter}></input>
         </div>
         <nav className="todo-panel__button-bar">
           <button className="todo-panel__btn">Todo</button>
@@ -21,4 +36,4 @@ class TodoPanel extends Component {
   }
 }
 
-export default TodoPanel;
+export default connect(null, { addTodo })(TodoPanel);
