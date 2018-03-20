@@ -1,41 +1,45 @@
-export default function todos(state = [], action) {
+import localStore from "./localStore";
+
+export default function todos(state = localStore.get("todos", []), action) {
   let i = 0;
+  let dirty = false;
+  let newState = null;
+
   switch (action.type) {
     case "ADD_TODO":
       if (action.content) {
-        state = state.slice();
-        state.push({
+        newState = state.slice();
+        newState.push({
           id: `${Date.now()}`,
           isDone: false,
           content: action.content,
         });
+        dirty = true;
       }
       break;
 
     case "UPDATE_TODO":
       i = state.findIndex(todo => todo.id === action.id);
       if (i >= 0 && action.content) {
-        state[i].content = action.content;
-        state = state.slice();
+        newState = state.slice();
+        newState[i].content = action.content;
+        dirty = true;
       }
       break;
 
     case "DEL_TODO":
-      state = state.filter(todo => todo.id !== action.id);
+      newState = state.filter(todo => todo.id !== action.id);
+      dirty = true;
       break;
 
     case "DEL_ALL_DONE":
-      let dirty = false;
-      let newState = state.filter(todo => {
+      newState = state.filter(todo => {
         if (todo.isDone) {
           dirty = true;
           return false;
         }
         return true;
       });
-      if (dirty) {
-        state = newState;
-      }
       break;
 
     case "DONE_TODO":
@@ -44,11 +48,17 @@ export default function todos(state = [], action) {
       if (i >= 0) {
         let done = action.type === "DONE_TODO";
         if (state[i].isDone !== done) {
-          state[i].isDone = !state[i].isDone;
-          state = state.slice();
+          newState = state.slice();
+          newState[i].isDone = !state[i].isDone;
+          dirty = true;
         }
       }
       break;
+  }
+
+  if (dirty) {
+    localStore.set("todos", newState);
+    return newState;
   }
   return state;
 }

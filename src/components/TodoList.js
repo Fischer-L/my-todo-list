@@ -9,7 +9,6 @@ import "./TodoList.css";
 
 class TodoItem extends Component {
   onDoneBtnClick = () => {
-    console.log("TMP> onDoneBtnClick", this.props.todo.isDone);
     if (!this.props.todo.isDone) {
       this.props.doneTodo(this.props.todo.id);
     } else {
@@ -79,7 +78,6 @@ TodoItem.propTypes = {
 
 class TodoList extends Component {
   render() {
-    console.log("TMP> TodoList render");
     let todoItems = this.props.visibleTodos
                         .map(todo => <TodoItem
                                         key={todo.id} todo={todo}
