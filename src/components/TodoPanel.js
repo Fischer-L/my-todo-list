@@ -54,6 +54,13 @@ class TodoPanel extends Component {
         });
       });
     });
+    // Another fragile part from mobile.
+    // In some device, have to focus input in the touchend event.
+    // So we register the touchend event for mobile beside the mouseup for PC.
+    // So need to stop the mouse event simulation on mobile.
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
   }
 
   render() {
@@ -102,7 +109,8 @@ class TodoPanel extends Component {
           }
           <button id="todo-panel-add-btn"
                   className="todo-panel__btn"
-                  onTouchEnd={this.onAskAddTodo}
+                  onMouseUp={this.onAskAddTodo} // For PC environment
+                  onTouchEnd={this.onAskAddTodo} // For mobile environment
           >Add</button>
           <button className="todo-panel__btn"
                   onMouseUp={this.onDelAllDone}
