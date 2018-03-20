@@ -1,10 +1,4 @@
-@import "TodoPanel.scss";
-
-@function get-list-var($name, $width-size: "small") {
-  $done-btn-width: 4rem;
-
-  @if $name == "done-btn-width" { @return $done-btn-width; }
-}
+@import "AppEnv.scss";
 
 .todo-list {
   width: 100%;

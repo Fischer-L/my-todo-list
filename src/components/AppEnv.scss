@@ -1,0 +1,54 @@
+// NOTICE: It's better to use the modern CSS variable.
+//         However, the mobile side is fragile on supporting that.
+//         So we go with SCSS variable and function.
+@function get-var($name, $width-size: "small") {
+  @if $width-size == "small" {    
+
+    @if $name == "app-width" { @return 100%; }
+    @if $name == "app-max-width" { @return 100%; }
+ 
+  } @else {
+
+    @if $name == "app-width" { @return 70%; }
+    @if $name == "app-max-width" { @return 640px; }
+
+  }
+}
+
+$app-big-screen-width: 48em;
+$app-font-color: #555;
+$app-active-color: #efac2f;
+
+@function get-panel-var($name, $width-size: "small") {
+  $title-height: 3rem; 
+  $input-height: 2rem;
+  $top-panel-btm-space: 0.7rem;
+  $button-bar-height: 3.3rem;
+  $title-font-size: 1.8rem;
+  $input-font-size: 1rem;
+  @if $width-size == "big" {
+    $title-height: 5rem;
+    $input-height: 3rem;
+    $top-panel-btm-space: 1rem;
+    $title-font-size: 2.4rem;
+    $input-font-size: 1rem;
+  }
+  $top-panel-height: $title-height + $input-height + $top-panel-btm-space;
+
+  @if $name == "title-font-size" { @return $title-font-size; }
+  @if $name == "input-font-size" { @return $input-font-size; }
+  @if $name == "title-height" { @return $title-height; }
+  @if $name == "input-height" { @return  $input-height; }
+  @if $name == "top-panel-btm-space" { @return  $top-panel-btm-space; }
+  @if $name == "top-panel-height" { @return $top-panel-height; }
+  @if $name == "button-bar-height" { @return $button-bar-height; }
+  @if $name == "panel-height" {
+    @if $width-size == "big" { @return $top-panel-height + $button-bar-height; }
+    @return $top-panel-height;
+  }
+}
+
+@function get-list-var($name, $width-size: "small") {
+  $done-btn-width: 4rem;
+  @if $name == "done-btn-width" { @return $done-btn-width; }
+}

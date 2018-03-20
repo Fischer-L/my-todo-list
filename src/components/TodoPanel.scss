@@ -1,33 +1,4 @@
-@import "App.scss";
-
-@function get-panel-var($name, $width-size: "small") {
-  $title-height: 3rem; 
-  $input-height: 2rem;
-  $top-panel-btm-space: 0.7rem;
-  $button-bar-height: 3.3rem;
-  $title-font-size: 1.8rem;
-  $input-font-size: 1rem;
-  @if $width-size == "big" {
-    $title-height: 5rem;
-    $input-height: 3rem;
-    $top-panel-btm-space: 1rem;
-    $title-font-size: 2.4rem;
-    $input-font-size: 1rem;
-  }
-  $top-panel-height: $title-height + $input-height + $top-panel-btm-space;
-
-  @if $name == "title-font-size" { @return $title-font-size; }
-  @if $name == "input-font-size" { @return $input-font-size; }
-  @if $name == "title-height" { @return $title-height; }
-  @if $name == "input-height" { @return  $input-height; }
-  @if $name == "top-panel-btm-space" { @return  $top-panel-btm-space; }
-  @if $name == "top-panel-height" { @return $top-panel-height; }
-  @if $name == "button-bar-height" { @return $button-bar-height; }
-  @if $name == "panel-height" {
-    @if $width-size == "big" { @return $top-panel-height + $button-bar-height; }
-    @return $top-panel-height;
-  }
-}
+@import "AppEnv.scss";
 
 .todo-panel {
   width: 100%;

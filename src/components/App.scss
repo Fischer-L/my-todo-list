@@ -1,25 +1,4 @@
-/*
-NOTICE: It's better to use the modern CSS variable.
-        However, the mobile side is fragile on supporting that.
-        So we go with SCSS variable and function.
-*/
-@function get-var($name, $width-size: "small") {
-  @if $width-size == "small" {    
-
-    @if $name == "app-width" { @return 100%; }
-    @if $name == "app-max-width" { @return 100%; }
- 
-  } @else {
-
-    @if $name == "app-width" { @return 70%; }
-    @if $name == "app-max-width" { @return 640px; }
-
-  }
-}
-
-$app-big-screen-width: 48em;
-$app-font-color: #555;
-$app-active-color: #efac2f;
+@import "AppEnv.scss";
 
 * {
   box-sizing: border-box;
